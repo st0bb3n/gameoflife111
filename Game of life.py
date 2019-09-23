@@ -1,6 +1,33 @@
 #game of life
 
+import itertools as stobben
+
 grid = [
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+]
+
+newgrid = [
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -33,8 +60,15 @@ def showGrid():
     print('')
     #return True
 
+def shownewGrid():
+    #grid = newgrid
+    for i in range(22):
+        print(grid[i])
+    print('')
+    #return True
+
 def placeCell():
-    fh = open("cross.txt", "r")
+    fh = open("ten_cell_row.txt", "r")
     content = fh.read().splitlines()
     for i in range(len(content)):
         coord = (content[i]).split()
@@ -46,7 +80,7 @@ def placeCell():
         column = int(listofcoord[elementno][1])
         grid[row][column] = 1
         #print(row,column)
-    showGrid()
+    #showGrid()
     #print(content)
 
     fh.close()
@@ -450,7 +484,7 @@ def GameOfLife():
 
 '''
 
-def GameOfLife(a,b,neighbor):
+def GameOfLife(a,b):
     neighbor = 0
     if (a > 0 and b > 0) and (a < 20 and b < 20): #all in the middle
         if grid[a-1][b-1] == 1:
@@ -469,17 +503,17 @@ def GameOfLife(a,b,neighbor):
             neighbor += 1
         if grid[a+1][b+1] == 1:
             neighbor += 1
-        print(a, b, "has", neighbor, "neighbors")
+        #print(a, b, "has", neighbor, "neighbors")
         #killer(a, b, neighbor)
         #return (a, b, neighbor)
     if a == 0 and b == 0:  # up left
         if grid[a][b + 1] == 1:
             neighbor += 1
-        if grid[a + 1][b] == 1:
+        if grid[a+1][b] == 1:
             neighbor += 1
-        if grid[a + 1][b + 1] == 1:
+        if grid[a+1][b+1] == 1:
             neighbor += 1
-        print(a, b, "has", neighbor, "neighbors")
+        #print(a, b, "has", neighbor, "neighbors")
         #killer(a, b, neighbor)
         #return (a, b, neighbor)
     if a == 0 and b == 20: #up right
@@ -489,7 +523,7 @@ def GameOfLife(a,b,neighbor):
             neighbor += 1
         if grid[a+1][b-1] == 1:
             neighbor += 1
-        print(a, b, "has", neighbor, "neighbors")
+        #print(a, b, "has", neighbor, "neighbors")
         #killer(a, b, neighbor)
         #return (a, b, neighbor)
     if a == 20 and b == 0: #down left
@@ -499,7 +533,7 @@ def GameOfLife(a,b,neighbor):
             neighbor += 1
         if grid[a][b+1] == 1:
             neighbor += 1
-        print(a, b, "has", neighbor, "neighbors")
+        #print(a, b, "has", neighbor, "neighbors")
         #killer(a, b, neighbor)
         #return (a, b, neighbor)
     if a == 20 and b == 20: #down right
@@ -509,7 +543,7 @@ def GameOfLife(a,b,neighbor):
             neighbor += 1
         if grid[a-1][b-1] == 1:
             neighbor += 1
-        print(a, b, "has", neighbor, "neighbors")
+        #print(a, b, "has", neighbor, "neighbors")
         #killer(a, b, neighbor)
         #return (a, b, neighbor)
     if a == 0 and 1 <= b <= 19: #up
@@ -523,7 +557,7 @@ def GameOfLife(a,b,neighbor):
             neighbor += 1
         if grid[a+1][b+1] == 1:
             neighbor += 1
-        print(a, b, "has", neighbor, "neighbors")
+        #print(a, b, "has", neighbor, "neighbors")
         #killer(a,b,neighbor)
         #return (a, b, neighbor)
     if a == 20 and 1 <= b <= 19: #down
@@ -537,7 +571,7 @@ def GameOfLife(a,b,neighbor):
             neighbor += 1
         if grid[a-1][b + 1] == 1:
             neighbor += 1
-        print(a, b, "has", neighbor, "neighbors")
+        #print(a, b, "has", neighbor, "neighbors")
         #killer(a, b, neighbor)
         #return (a, b, neighbor)
     if b == 20 and 1 <= a <= 19: #right
@@ -551,7 +585,7 @@ def GameOfLife(a,b,neighbor):
             neighbor += 1
         if grid[a+1][b-1] == 1:
             neighbor += 1
-        print(a, b, "has", neighbor, "neighbors")
+        #print(a, b, "has", neighbor, "neighbors")
         #killer(a, b, neighbor)
         #return (a, b, neighbor)
     if b == 0 and 1 <= a <= 19: #left
@@ -565,25 +599,33 @@ def GameOfLife(a,b,neighbor):
             neighbor += 1
         if grid[a-1][b+1] == 1:
             neighbor += 1
-        print(a, b, "has", neighbor, "neighbors")
+        #print(a, b, "has", neighbor, "neighbors")
         #killer(a, b, neighbor)
         #return(a,b,neighbor)
     #print(a, b, "has", neighbor, "neighbors")
+    killer(a, b, neighbor)
     #print(a,b)
 
-def killer(a,b,neighbor):
-    if grid[a][b] == 1 and neighbor >= 1:
-        grid[a][b] = 0
-    if grid[a][b] == 1 and neighbor <= 4:
-        grid[a][b] = 0
+def killer(a, b, neighbor):
+    if grid[a][b] == 1 and neighbor <= 1:
+        newgrid[a][b] = 0
+    if grid[a][b] == 1 and neighbor >= 4:
+        newgrid[a][b] = 0
     if grid[a][b] == 1 and (neighbor == 2 or neighbor == 3):
-        grid[a][b] = 1
+        newgrid[a][b] = 1
     if grid[a][b] == 0 and neighbor == 3:  # populator
-        grid[a][b] = 1
-    else:
-        grid[a][b] = grid[a][b]
-
+        newgrid[a][b] = 1
+    if grid[a][b] == 0 and neighbor <= 2:
+        newgrid[a][b] = 0
+    if grid[a][b] == 0 and neighbor >= 4:
+        newgrid[a][b] = 0
+    #else:
+     #   newgrid[a][b] = newgrid[a][b]
     #print(a,b,neighbor)
+    #neighbor = 0
+    #return neighbor
+
+
 
 '''
             if grid[a][b] == 1 and neighbor >= 1:
@@ -621,12 +663,71 @@ def killer(a,b,neighbor):
 '''
 
 
+'''
 
+FOR DEBUGGING PURPOSES (CODE BELOW)
+
+'''
 showGrid() #shows empty grid
 placeCell() #loads cell location depending on .txt
-for i in range(21): #first check aka GENERATION 0
+showGrid()
+#for z in range(11):
+for i in range(21): #first check aka GENERATION 1
     for o in range(21):
-        GameOfLife(i,o,0)
-        #print(i,o,neighbor)
+        GameOfLife(i,o)
+        if i == 20 and o == 20:
+            continue
+    #print(i,o,neighbor)
+    #neighbor = 0
+#del grid[:]
+grid = newgrid
+showGrid()
+print('nxtgrid')
 
+for i in range(21): #first check aka GENERATION 2
+    for o in range(21):
+        GameOfLife(i,o)
+        if i == 20 and o == 20:
+            continue
+    #print(i,o,neighbor)
+    #neighbor = 0
+#del grid[:]
+grid = newgrid
+showGrid()
+print('nxtgrid')
 
+for i in range(21): #first check aka GENERATION 3
+    for o in range(21):
+        GameOfLife(i,o)
+        if i == 20 and o == 20:
+            continue
+    #print(i,o,neighbor)
+    #neighbor = 0
+#del grid[:]
+grid = newgrid
+showGrid()
+print('nxtgrid')
+
+for i in range(21): #first check aka GENERATION 4
+    for o in range(21):
+        GameOfLife(i,o)
+        if i == 20 and o == 20:
+            continue
+    #print(i,o,neighbor)
+    #neighbor = 0
+#del grid[:]
+grid = newgrid
+showGrid()
+print('nxtgrid')
+
+for i in range(21): #first check aka GENERATION 5
+    for o in range(21):
+        GameOfLife(i,o)
+        if i == 20 and o == 20:
+            continue
+    #print(i,o,neighbor)
+    #neighbor = 0
+#del grid[:]
+grid = newgrid
+showGrid()
+print('nxtgrid')
