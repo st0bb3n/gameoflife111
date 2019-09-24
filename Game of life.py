@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+
+"""
+
+Created on Thu Sep 19 15:24:10 2019
+
+
+
+@author: Stob
+
+"""
 #game of life
 
 grid = [
