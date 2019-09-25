@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*-
-
+"""
+ST0BB3N
 """
 
-Created on Thu Sep 19 15:24:10 2019
-
-
-
-@author: Stob
-
-"""
 #game of life
 
 import time as stib #stib.sleeps sounds fun
@@ -73,7 +67,7 @@ def showGrid(): #shows the grid
     #return True
 
 def placeCell(): #places the cell based on the txt
-    fh = open("ten_cell_row.txt", "r") #load the appopriate text file here
+    fh = open("tumbler.txt", "r") #load the appopriate text file here
     content = fh.read().splitlines()
     for i in range(len(content)):
         coord = (content[i]).split()
@@ -352,9 +346,12 @@ def gridUpdate(): #updates the base grid
             grid[i][o] = newgrid[i][o]
 
 showGrid() #shows empty grid
+print('---------------')
+stib.sleep(1)
 placeCell() #loads cell location depending on .txt
 showGrid()
 stib.sleep(1)
+print('---------------')
 for z in range(10): #shows how many generation to be made
     for i in range(21):
         for o in range(21):
