@@ -11,6 +11,8 @@ Created on Thu Sep 19 15:24:10 2019
 """
 #game of life
 
+import time as stib #stib.sleeps sounds fun
+
 grid = [
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -65,12 +67,13 @@ listofcoord = []
 
 def showGrid(): #shows the grid
     for i in range(0,21):
-        print(grid[i])
-    print('')
+        #print(grid[i])
+        a = ''.join(map(str, grid[i]))
+        print(a)
     #return True
 
 def placeCell(): #places the cell based on the txt
-    fh = open("cross.txt", "r") #load the appopriate text file here
+    fh = open("ten_cell_row.txt", "r") #load the appopriate text file here
     content = fh.read().splitlines()
     for i in range(len(content)):
         coord = (content[i]).split()
@@ -351,13 +354,17 @@ def gridUpdate(): #updates the base grid
 showGrid() #shows empty grid
 placeCell() #loads cell location depending on .txt
 showGrid()
+stib.sleep(1)
 for z in range(10): #shows how many generation to be made
     for i in range(21):
         for o in range(21):
             GameOfLife(i,o)
     gridUpdate()
     showGrid()
-    print('nxtgrid')
+    print('---------------')
+    stib.sleep(1)
+print("Simulation Done!")
+
 
 '''
 
