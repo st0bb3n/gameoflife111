@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 """
 ST0BB3N
+Game of Life
 """
-
-#game of life
 
 import time as stib #stib.sleeps sounds fun
 
+'''
+Main grid
+'''
 grid = [
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -32,6 +34,9 @@ grid = [
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 ]
 
+'''
+Temporary grid (for updating)
+'''
 newgrid = [
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -59,6 +64,9 @@ newgrid = [
 
 listofcoord = []
 
+'''
+Function to print the grid
+'''
 def showGrid(): #shows the grid
     for i in range(0,21):
         #print(grid[i])
@@ -66,8 +74,14 @@ def showGrid(): #shows the grid
         print(a)
     #return True
 
+'''
+Function to place the coordinates based on the TXT file. File handling included.
+Currently has:
+Tumbler, Exploder, Ten Cell Row, Cross, Small Exploder, and Corners
+Also has Glider (custom)
+'''
 def placeCell(): #places the cell based on the txt
-    fh = open("tumbler.txt", "r") #load the appopriate text file here
+    fh = open("glider.txt", "r") #load the appopriate text file here
     content = fh.read().splitlines()
     for i in range(len(content)):
         coord = (content[i]).split()
@@ -84,6 +98,9 @@ def placeCell(): #places the cell based on the txt
 
     fh.close()
 
+'''
+Function whose sole purpose is to count the number of neighbor of an specific cell. Just used in debugging
+'''
 '''
 def neighborCounter():  #Neighbor Counter for debugging 
     neighbor = 0
@@ -199,6 +216,9 @@ def neighborCounter():  #Neighbor Counter for debugging
                 neighbor = 0
 '''
 
+'''
+Function the implemented the rules of game of life, neighbor counter is also implemented
+'''
 def GameOfLife(a,b): #Game of life mechanics with integrated neighbor counter
     neighbor = 0
     if (a > 0 and b > 0) and (a < 20 and b < 20): #all in the middle
@@ -321,6 +341,9 @@ def GameOfLife(a,b): #Game of life mechanics with integrated neighbor counter
     killer(a, b, neighbor)
     #print(a,b)
 
+'''
+Function for killing/populating an specific cell
+'''
 def killer(a, b, neighbor):
     if grid[a][b] == 1 and neighbor <= 1:
         newgrid[a][b] = 0
@@ -339,12 +362,18 @@ def killer(a, b, neighbor):
     #print(a,b,neighbor)
     #neighbor = 0
     #return neighbor
-
+	
+'''
+Updates the main grid 
+'''
 def gridUpdate(): #updates the base grid
     for i in range(0,21):
         for o in range(0,21):
             grid[i][o] = newgrid[i][o]
 
+'''
+Whole sequence
+'''
 showGrid() #shows empty grid
 print('---------------')
 stib.sleep(1)
@@ -352,7 +381,7 @@ placeCell() #loads cell location depending on .txt
 showGrid()
 stib.sleep(1)
 print('---------------')
-for z in range(10): #shows how many generation to be made
+for z in range(11): #shows how many generation to be made
     for i in range(21):
         for o in range(21):
             GameOfLife(i,o)
@@ -364,9 +393,7 @@ print("Simulation Done!")
 
 
 '''
-
 FOR DEBUGGING PURPOSES (CODE BELOW)
-
 '''
 
 '''
