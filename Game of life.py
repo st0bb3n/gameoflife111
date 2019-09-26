@@ -3,7 +3,7 @@
 Created on Thu Sep 26 10:11:23 2019
 
 @author: Steven Kyle Y Esguerra SN: 201905959
-@author2: Ivan Patrick Frondozo SN: 2019
+@author2: Ivan Patrick Frondozo SN: 201907500
 """
 
 import time as stib #stib.sleeps needed
