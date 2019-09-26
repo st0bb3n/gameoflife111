@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-ST0BB3N
-Game of Life
+Created on Thu Sep 26 10:11:23 2019
+
+@author: Steven Kyle Y Esguerra SN: 201905959
+@author2: Ivan Patrick Frondozo SN: 2019
 """
 
-import time as stib #stib.sleeps sounds fun
+import time as stib #stib.sleeps needed
 
 '''
 Main grid
@@ -372,8 +374,10 @@ def gridUpdate(): #updates the base grid
             grid[i][o] = newgrid[i][o]
 
 '''
-Whole sequence
+Whole sequence, change z range to how many iteration to be done
+11 = 10 generation
 '''
+print('---------------')
 showGrid() #shows empty grid
 print('---------------')
 stib.sleep(1)
