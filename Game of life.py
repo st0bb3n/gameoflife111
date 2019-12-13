@@ -2,11 +2,11 @@
 """
 Created on Thu Sep 26 10:11:23 2019
 
-@author: Steven Kyle Y Esguerra SN: 201905959
-@author2: Ivan Patrick Frondozo SN: 201907500
+@author: Steven Kyle Y Esguerra SN: 2019#####
 """
 
 import time as stib #stib.sleeps needed
+import sys
 
 '''
 Main grid
@@ -83,7 +83,42 @@ Tumbler, Exploder, Ten Cell Row, Cross, Small Exploder, and Corners
 Also has Glider (custom)
 '''
 def placeCell(): #places the cell based on the txt
-    fh = open("glider.txt", "r") #load the appopriate text file here
+    print("Preset files")
+    print("---------------")
+    print("[1] Corners")
+    print("[2] Cross")
+    print("[3] Exploder")
+    print("[4] Glider")
+    print("[5] Small Exploder")
+    print("[6] Ten Cell Row")
+    print("[7] Tumbler")
+    print("[8] Exit App")
+    print("---------------")
+    while True:
+        try:
+            preset = int(input("Which file to load?: "))
+            print("--------------")
+            break
+        except ValueError:
+	        print("Please enter valid input")
+    if preset == 1:
+	    file_name="corners.txt"
+    if preset == 2:
+	    file_name="cross.txt"
+    if preset == 3:
+	    file_name="exploder.txt"
+    if preset == 4:
+	    file_name="glider.txt"
+    if preset == 5:
+	    file_name="small_exploder.txt"
+    if preset == 6:
+	    file_name="ten_cell_row.txt"
+    if preset == 7:
+	    file_name="tumbler.txt"
+    if preset == 8:
+	    sys.exit
+	
+    fh = open(file_name, "r") #load the appopriate text file here
     content = fh.read().splitlines()
     for i in range(len(content)):
         coord = (content[i]).split()
@@ -373,27 +408,52 @@ def gridUpdate(): #updates the base grid
         for o in range(0,21):
             grid[i][o] = newgrid[i][o]
 
+
 '''
 Whole sequence, change z range to how many iteration to be done
 11 = 10 generation
 '''
 print('---------------')
-showGrid() #shows empty grid
+#showGrid() #shows empty grid
+print("WELCOME TO JOHN CONWAY'S GAME OF LIFE")
+print("written by st0bb3n on python 3")
 print('---------------')
 stib.sleep(1)
-placeCell() #loads cell location depending on .txt
+placeCell()
 showGrid()
+while True:
+    try:
+        print("---------------")
+        ii = int(input("How many generations do you want? 0 for infinite: "))
+        print('---------------')
+        break
+    except ValueError:
+	    print("Please enter a valid integer")
 stib.sleep(1)
 print('---------------')
-for z in range(11): #shows how many generation to be made
-    for i in range(21):
-        for o in range(21):
-            GameOfLife(i,o)
-    gridUpdate()
-    showGrid()
-    print('---------------')
-    stib.sleep(1)
-print("Simulation Done!")
+
+if ii > 0:
+    for z in range(ii): #shows how many generation to be made
+        for i in range(21):
+            for o in range(21):
+                GameOfLife(i,o)
+        gridUpdate()
+        showGrid()
+        print('---------------')
+        stib.sleep(1)
+    print("Simulation Done!")
+if ii == 0:
+    while True: #shows how many generation to be made
+        for i in range(21):
+            for o in range(21):
+                GameOfLife(i,o)
+        gridUpdate()
+        showGrid()
+        print('---------------')
+        print('Ctrl + C to terminate')
+        print('---------------')
+        stib.sleep(1)
+
 
 
 '''
